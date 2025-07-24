@@ -74,8 +74,7 @@ abstract class AbstractTokenManagerTestCase extends TestCase
         string $accessToken = 'test_access_token',
         string $refreshToken = 'test_refresh_token',
         int    $expiresIn = 7200
-    ): array
-    {
+    ): array {
         return [
             'access_token' => $accessToken,
             'refresh_token' => $refreshToken,
@@ -90,8 +89,7 @@ abstract class AbstractTokenManagerTestCase extends TestCase
     protected function createCachedTokenData(
         string $accessToken = 'cached_access_token',
         ?int   $expiresAt = null
-    ): array
-    {
+    ): array {
         $expiresAt ??= (time() + 3600);
 
         return [
