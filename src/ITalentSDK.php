@@ -33,6 +33,8 @@ class ITalentSDK extends ContainerBuilder
 
     private array $apiServices = [
         'openapi' => \ITalentOpenSDK\Api\OpenApi::class,
+        'Employee' => \ITalentOpenSDK\Api\Employee::class,
+        'Organization' => \ITalentOpenSDK\Api\Organization::class,
     ];
 
     public function __construct(array $config)

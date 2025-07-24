@@ -79,8 +79,6 @@ class TokenDataTest extends TestCase
         $this->assertFalse($validTokenData->isExpired());
     }
 
-
-
     public function testGetRemainingTime(): void
     {
         $tokenData = new TokenData('test_token', 'refresh_token', 3600);

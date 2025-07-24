@@ -51,5 +51,6 @@ return $config
             'header' => $header,
         ],
         'no_unused_imports' => true,
+        'no_extra_blank_lines' => true,
     ])
     ->setFinder($finder);

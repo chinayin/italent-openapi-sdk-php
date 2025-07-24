@@ -17,7 +17,17 @@ class Model
 {
     public function toArray(): array
     {
-        return array_filter((array)$this, fn ($v) => null !== $v);
+        $reflection = new \ReflectionClass($this);
+        $properties = $reflection->getProperties();
+        $result = [];
+        foreach ($properties as $property) {
+            $property->setAccessible(true);
+            $value = $property->getValue($this);
+            if ($value !== null) {
+                $result[$property->getName()] = $value;
+            }
+        }
+        return $result;
     }
 
     public function generateBody(): string
