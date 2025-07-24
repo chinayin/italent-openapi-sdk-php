@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace ITalentOpenSDK\Tests;
 
-use ITalentOpenSDK\Api\Open;
 use ITalentOpenSDK\Api\OpenApi;
 use ITalentOpenSDK\Auth\ITalentTokenManager;
 use ITalentOpenSDK\Auth\TokenStrategyInterface;

@@ -30,8 +30,7 @@ class TokenData
         /** @var int 默认访问令牌有效期（秒） */
         int    $expiresIn = 7200,
         string $tokenType = 'Bearer'
-    )
-    {
+    ) {
         $this->accessToken = $accessToken;
         $this->refreshToken = $refreshToken;
         $this->expiresIn = $expiresIn;

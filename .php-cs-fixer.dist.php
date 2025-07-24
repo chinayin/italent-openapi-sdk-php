@@ -30,6 +30,7 @@ $finder = PhpCsFixer\Finder::create()
         'vendor',
         'runtime',
     ])
+    ->files()
     ->name('*.php')
     ->notName('*.blade.php')
     ->ignoreDotFiles(true)
@@ -49,5 +50,6 @@ return $config
         'header_comment' => [
             'header' => $header,
         ],
+        'no_unused_imports' => true,
     ])
     ->setFinder($finder);
