@@ -136,4 +136,15 @@ class Employee
         return ScrollResult::fromArray($r);
     }
 
+    /**
+     * 根据员工UserID集合获取指定条件的任职记录相关信息
+     *
+     * @link https://open.italent.cn/#/open-document?menu=document-center&id=e0b9ab6d-0ca7-41cc-8104-6637961aee8d
+     */
+    public function getServiceInfoByIds(SearchFilter $filter): ScrollResult
+    {
+        $r = $this->httpClient->postJson("TenantBaseExternal/api/v{$this->version}/Employee/GetServiceInfoByIds", $filter->toArray());
+        return ScrollResult::fromArray($r);
+    }
+
 }

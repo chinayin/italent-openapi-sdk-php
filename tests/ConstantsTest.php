@@ -17,6 +17,14 @@ use ITalentOpenSDK\Constants;
 
 class ConstantsTest extends TestCase
 {
+    public function testSdkConstants(): void
+    {
+        $this->assertEquals('1.0.0', Constants::SDK_VERSION);
+        $this->assertEquals('https://openapi.italent.cn/', Constants::SDK_BASE_URI);
+        $this->assertEquals(1, Constants::SDK_RETRY_MAX_RETRIES);
+        $this->assertEquals('PRC', Constants::SDK_LOGGER_TIMEZONE);
+    }
+
     public function testBasicSubsetConstants(): void
     {
         $this->assertEquals('jobhistory', Constants::SUBSET_JOB_HISTORY);
@@ -42,11 +50,15 @@ class ConstantsTest extends TestCase
         $this->assertEquals('PresetSubset40', Constants::SUBSET_PRESET_40);
     }
 
-    public function testSdkConstants(): void
+    public function testApprovalStatusConstants(): void
     {
-        $this->assertEquals('1.0.0', Constants::SDK_VERSION);
-        $this->assertEquals('https://openapi.italent.cn/', Constants::SDK_BASE_URI);
-        $this->assertEquals(1, Constants::SDK_RETRY_MAX_RETRIES);
-        $this->assertEquals('PRC', Constants::SDK_LOGGER_TIMEZONE);
+        $this->assertEquals(0, Constants::APPROVAL_STATUS_DRAFT);
+        $this->assertEquals(1, Constants::APPROVAL_STATUS_IN_PROGRESS);
+        $this->assertEquals(2, Constants::APPROVAL_STATUS_APPROVED);
+        $this->assertEquals(3, Constants::APPROVAL_STATUS_REJECTED);
+        $this->assertEquals(4, Constants::APPROVAL_STATUS_EFFECTIVE);
+        $this->assertEquals(5, Constants::APPROVAL_STATUS_OBSOLETE);
+        $this->assertEquals(6, Constants::APPROVAL_STATUS_RETURNED);
     }
+
 }

@@ -28,15 +28,18 @@ use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
+/**
+ * ITalent OpenAPI SDK 主类
+ */
 class ITalentSDK extends ContainerBuilder
 {
     private ArrayCollection $config;
 
     private array $apiServices = [
         'openapi' => ITalentApi\OpenApi::class,
-        'Base.Organization' => ITalentApi\TenantBaseExternal\Organization::class,
-        'Base.Employee' => ITalentApi\TenantBaseExternal\Employee::class,
-        'Base.EmployeeSubset' => ITalentApi\TenantBaseExternal\EmployeeSubset::class,
+        'TenantBase.Organization' => ITalentApi\TenantBaseExternal\Organization::class,
+        'TenantBase.Employee' => ITalentApi\TenantBaseExternal\Employee::class,
+        'TenantBase.EmployeeSubset' => ITalentApi\TenantBaseExternal\EmployeeSubset::class,
     ];
 
     public function __construct(array $config)

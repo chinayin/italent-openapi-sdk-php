@@ -24,7 +24,7 @@ class EmployeeTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->api = $this->sdk->get('Base.Employee');
+        $this->api = $this->sdk->get('TenantBase.Employee');
     }
 
     public function testGetUserIDByEmail(): void
@@ -62,7 +62,7 @@ class EmployeeTest extends TestCase
 
     public function testGetBasicInfoByIds(): void
     {
-        $oIds = [630144054];
+        $oIds = [631676689];
         $result = $this->api->getBasicInfoByIds($oIds);
         $this->assertTrue($result->hasMore());
         $this->assertNotEmpty($result->items());
@@ -74,6 +74,16 @@ class EmployeeTest extends TestCase
         $columns = ['userID', 'name', 'email'];
         $result = $this->api->getJuniorById($oId, (new SearchFilter())->setColumns($columns));
         $this->assertTrue($result->hasMore());
+        $this->assertNotEmpty($result->items());
+    }
+
+    public function testGetServiceInfoByIds(): void
+    {
+        $oIds = [631676689];
+        $searchFilter = (new SearchFilter())
+            ->setOIds($oIds);
+
+        $result = $this->api->getServiceInfoByIds($searchFilter);
         $this->assertNotEmpty($result->items());
     }
 

@@ -57,7 +57,7 @@ class Organization
             );
         }
         $filter ??= new SearchFilter();
-        $filter->setExtraParam('oIds', $oIds);
+        $filter->setOIds($oIds);
 
         $r = $this->httpClient->postJson("TenantBaseExternal/api/v{$this->version}/Organization/GetByIds", $filter->toArray());
         return ScrollResult::fromArray($r);
@@ -84,6 +84,20 @@ class Organization
         $filter->setExtraParam('codes', $codes);
 
         $r = $this->httpClient->postJson("TenantBaseExternal/api/v{$this->version}/Organization/GetOrganizationInfoByCodes", $filter->toArray());
+        return ScrollResult::fromArray($r);
+    }
+
+    /**
+     * 查询指定组织的下级组织单元列表
+     *
+     * @link https://open.italent.cn/#/open-document?menu=document-center&id=cab6a177-82a4-45ac-a0e3-18a4d9f4bb3a
+     */
+    public function getSubOrganizations(int $oId, ?SearchFilter $filter = null): ScrollResult
+    {
+        $filter ??= new SearchFilter();
+        $filter->setExtraParam('oId', $oId);
+
+        $r = $this->httpClient->postJson("TenantBaseExternal/api/v{$this->version}/Organization/GetSubOrganizations", $filter->toArray());
         return ScrollResult::fromArray($r);
     }
 

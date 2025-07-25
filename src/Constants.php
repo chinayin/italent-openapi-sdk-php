@@ -83,4 +83,13 @@ class Constants
     public const SUBSET_PRESET_39 = 'PresetSubset39'; // 预制子集39
     public const SUBSET_PRESET_40 = 'PresetSubset40'; // 预制子集40
 
+    /** 审批状态常量 - CoreHr_审批状态-可用选项 */
+    public const APPROVAL_STATUS_DRAFT = 0; // 草稿
+    public const APPROVAL_STATUS_IN_PROGRESS = 1; // 审批中
+    public const APPROVAL_STATUS_APPROVED = 2; // 审批通过
+    public const APPROVAL_STATUS_REJECTED = 3; // 审批未通过
+    public const APPROVAL_STATUS_EFFECTIVE = 4; // 生效
+    public const APPROVAL_STATUS_OBSOLETE = 5; // 作废
+    public const APPROVAL_STATUS_RETURNED = 6; // 已驳回
+
 }

@@ -24,7 +24,7 @@ class OrganizationTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->api = $this->sdk->get('Base.Organization');
+        $this->api = $this->sdk->get('TenantBase.Organization');
     }
 
     public function testGetByTimeWindow(): void
@@ -49,6 +49,14 @@ class OrganizationTest extends TestCase
     {
         $codes = ['RootOrg', 'U0154'];
         $result = $this->api->getOrganizationInfoByCodes($codes);
+        $this->assertNotEmpty($result->items());
+    }
+
+    public function testGetSubOrganizations(): void
+    {
+        $tenantId = getenv('TENANT_ID');
+        $oId = intval("900$tenantId");
+        $result = $this->api->getSubOrganizations($oId);
         $this->assertNotEmpty($result->items());
     }
 

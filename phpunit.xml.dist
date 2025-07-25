@@ -18,6 +18,7 @@
     </testsuites>
     <php>
         <env name="APP_ENV" value="local"/>
+        <env name="TENANT_ID" value=""/>
         <env name="SDK_APP_KEY" value=""/>
         <env name="SDK_APP_SECRET" value=""/>
     </php>

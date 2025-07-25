@@ -18,6 +18,9 @@ namespace ITalentOpenSDK\Model;
  */
 class SearchFilter extends Model
 {
+    /** @var array|null 业务OId集合，示例：[116347665,116347666,116347667]。正整数，必填，元素个数小于等于300个 */
+    private ?array $oIds = null;
+
     /** @var string|null 时间范围开始时间，格式：2021-01-01T00:00:00 */
     private ?string $startTime = null;
 
@@ -53,6 +56,17 @@ class SearchFilter extends Model
 
     /** @var array 额外的自定义参数 */
     private array $extraParams = [];
+
+    public function setOIds(array $oIds): self
+    {
+        $this->oIds = $oIds;
+        return $this;
+    }
+
+    public function getOIds(): ?array
+    {
+        return $this->oIds;
+    }
 
     public function setStartTime(string $startTime): self
     {
@@ -208,6 +222,9 @@ class SearchFilter extends Model
         $result = [];
 
         // 添加标准参数
+        if ($this->oIds !== null) {
+            $result['oIds'] = $this->oIds;
+        }
         if ($this->startTime !== null) {
             $result['startTime'] = $this->startTime;
         }

@@ -25,7 +25,7 @@ class EmployeeSubsetTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->api = $this->sdk->get('Base.EmployeeSubset');
+        $this->api = $this->sdk->get('TenantBase.EmployeeSubset');
     }
 
     public function testGetByTimeWindow(): void
