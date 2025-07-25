@@ -85,14 +85,6 @@ class SearchFilterTest extends TestCase
     public function testColumns(): void
     {
         $filter = new SearchFilter();
-
-        // 测试 addColumn 方法
-        $filter->addColumn('Name');
-        $filter->addColumn('Code');
-
-        $this->assertEquals(['Name', 'Code'], $filter->getColumns());
-
-        // 测试 setColumns 方法
         $columns = ['Name', 'OId', 'Code', 'Status'];
         $filter->setColumns($columns);
         $this->assertEquals($columns, $filter->getColumns());

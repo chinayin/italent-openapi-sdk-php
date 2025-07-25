@@ -18,8 +18,6 @@ class ScrollResult extends Model
     private string $scrollId;
     private int $total;
     private array $data;
-    /** @deprecated 已废弃字段 */
-    private bool $isLastData;
 
     public static function fromArray(array $data): self
     {
@@ -27,7 +25,6 @@ class ScrollResult extends Model
         $self->scrollId = $data['scrollId'] ?? '';
         $self->data = $data['data'] ?? [];
         $self->total = $data['total'] ?? count($self->data);
-        $self->isLastData = $data['isLastData'] ?? false;
         return $self;
     }
 

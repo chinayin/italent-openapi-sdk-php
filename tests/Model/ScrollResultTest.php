@@ -108,10 +108,10 @@ class ScrollResultTest extends TestCase
 
         $result = ScrollResult::fromArray($data);
 
-        $this->assertIsString($result->scrollId());
-        $this->assertIsInt($result->total());
-        $this->assertIsArray($result->items());
-        $this->assertIsBool($result->hasMore());
+        $this->assertTrue($result->scrollId() === $data['scrollId']);
+        $this->assertTrue($result->total() === $data['total']);
+        $this->assertTrue($result->items() === $data['data']);
+        $this->assertTrue($result->hasMore() === $data['isLastData']);
     }
 
     public function testToArrayInheritedFromModel(): void
@@ -124,7 +124,6 @@ class ScrollResultTest extends TestCase
 
         $result = ScrollResult::fromArray($data);
         $array = $result->toArray();
-        $this->assertIsArray($array);
         $this->assertArrayHasKey('scrollId', $array);
         $this->assertArrayHasKey('total', $array);
         $this->assertArrayHasKey('data', $array);
