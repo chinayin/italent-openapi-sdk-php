@@ -18,7 +18,7 @@ use ITalentOpenSDK\Model\SearchFilter;
 use ITalentOpenSDK\Traits\HttpClientTrait;
 
 /**
- *  员工与认知
+ *  员工与任职
  */
 class Employee
 {
