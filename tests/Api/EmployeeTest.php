@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace ITalentOpenSDK\Tests\Api;
 
-use ITalentOpenSDK\Api\Employee;
+use ITalentOpenSDK\Api\TenantBaseExternal\Employee;
 use ITalentOpenSDK\Model\SearchFilter;
 use ITalentOpenSDK\Tests\TestCase;
 
@@ -24,7 +24,7 @@ class EmployeeTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->api = $this->sdk->get('Employee');
+        $this->api = $this->sdk->get('Base.Employee');
     }
 
     public function testGetUserIDByEmail(): void

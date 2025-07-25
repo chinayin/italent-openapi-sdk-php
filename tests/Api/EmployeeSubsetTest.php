@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace ITalentOpenSDK\Tests\Api;
 
-use ITalentOpenSDK\Api\EmployeeSubset;
+use ITalentOpenSDK\Api\TenantBaseExternal\EmployeeSubset;
 use ITalentOpenSDK\Constants;
 use ITalentOpenSDK\Model\SearchFilter;
 use ITalentOpenSDK\Tests\TestCase;
@@ -25,7 +25,7 @@ class EmployeeSubsetTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->api = $this->sdk->get('EmployeeSubset');
+        $this->api = $this->sdk->get('Base.EmployeeSubset');
     }
 
     public function testGetByTimeWindow(): void

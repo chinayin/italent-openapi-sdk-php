@@ -40,7 +40,7 @@ SDK提供两种API调用方式：
 use ITalentOpenSDK\Model\ScrollResult;
 
 // 获取Employee API实例
-$employee = $sdk->get('employee');
+$employee = $sdk->get('Base.Employee');
 
 // 根据邮箱获取用户ID
 $userId = $employee->getUserIDByEmail('user@example.com');

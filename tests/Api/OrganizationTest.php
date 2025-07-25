@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace ITalentOpenSDK\Tests\Api;
 
-use ITalentOpenSDK\Api\Organization;
+use ITalentOpenSDK\Api\TenantBaseExternal\Organization;
 use ITalentOpenSDK\Model\SearchFilter;
 use ITalentOpenSDK\Tests\TestCase;
 
@@ -24,7 +24,7 @@ class OrganizationTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->api = $this->sdk->get('Organization');
+        $this->api = $this->sdk->get('Base.Organization');
     }
 
     public function testGetByTimeWindow(): void

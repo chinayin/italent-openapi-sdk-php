@@ -15,6 +15,7 @@ namespace ITalentOpenSDK;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use GuzzleHttp\Client;
+use ITalentOpenSDK\Api as ITalentApi;
 use ITalentOpenSDK\Auth\TokenManagerFactory;
 use ITalentOpenSDK\Http\ClientFactory;
 use ITalentOpenSDK\Http\HttpClient;
@@ -32,10 +33,10 @@ class ITalentSDK extends ContainerBuilder
     private ArrayCollection $config;
 
     private array $apiServices = [
-        'openapi' => \ITalentOpenSDK\Api\OpenApi::class,
-        'Organization' => \ITalentOpenSDK\Api\Organization::class,
-        'Employee' => \ITalentOpenSDK\Api\Employee::class,
-        'EmployeeSubset' => \ITalentOpenSDK\Api\EmployeeSubset::class,
+        'openapi' => ITalentApi\OpenApi::class,
+        'Base.Organization' => ITalentApi\TenantBaseExternal\Organization::class,
+        'Base.Employee' => ITalentApi\TenantBaseExternal\Employee::class,
+        'Base.EmployeeSubset' => ITalentApi\TenantBaseExternal\EmployeeSubset::class,
     ];
 
     public function __construct(array $config)
