@@ -40,6 +40,7 @@ class ITalentSDK extends ContainerBuilder
         'TenantBase.Organization' => ITalentApi\TenantBaseExternal\Organization::class,
         'TenantBase.Employee' => ITalentApi\TenantBaseExternal\Employee::class,
         'TenantBase.EmployeeSubset' => ITalentApi\TenantBaseExternal\EmployeeSubset::class,
+        'TenantBase.JobPost' => ITalentApi\TenantBaseExternal\JobPost::class,
     ];
 
     public function __construct(array $config)

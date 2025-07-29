@@ -60,6 +60,18 @@ class EmployeeTest extends TestCase
         $this->assertNotEmpty($result->items());
     }
 
+    public function testGetEmployeeOfOrganization(): void
+    {
+        $orgOId = OrganizationTest::getTenantOrgId();
+        $searchFilter = (new SearchFilter())
+            ->setExtraParam('orgOId', $orgOId)
+            ->setCapacity(2);
+
+        $result = $this->api->getEmployeeOfOrganization($searchFilter);
+        $this->assertTrue($result->hasMore());
+        $this->assertNotEmpty($result->items());
+    }
+
     public function testGetBasicInfoByIds(): void
     {
         $oIds = [631676689];

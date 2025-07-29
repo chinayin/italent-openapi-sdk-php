@@ -98,6 +98,17 @@ class Employee
     }
 
     /**
+     * 滚动查询指定组织下的员工与单条任职信息
+     *
+     * @link https://open.italent.cn/#/open-document?menu=document-center&id=e01aa14c-7dda-430f-be9d-0d9aafc25dca
+     */
+    public function getEmployeeOfOrganization(SearchFilter $filter): ScrollResult
+    {
+        $r = $this->httpClient->postJson("TenantBaseExternal/api/v{$this->version}/Employee/GetEmployeeOfOrganization", $filter->toArray());
+        return ScrollResult::fromArray($r);
+    }
+
+    /**
      * 根据员工UserID集合获取未删除的员工相关信息
      *
      * @link https://open.italent.cn/#/open-document?menu=document-center&id=18aa3dc5-7215-4455-8dc3-35919c3eee12

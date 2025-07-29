@@ -52,11 +52,27 @@ class OrganizationTest extends TestCase
         $this->assertNotEmpty($result->items());
     }
 
-    public function testGetSubOrganizations(): void
+    public static function getTenantOrgId(): int
     {
         $tenantId = getenv('TENANT_ID');
-        $oId = intval("900$tenantId");
+        return intval("900$tenantId");
+    }
+
+    public function testGetSubOrganizations(): void
+    {
+        $oId = $this->getTenantOrgId();
         $result = $this->api->getSubOrganizations($oId);
+        $this->assertNotEmpty($result->items());
+    }
+
+    public function testGetSubOrganizationsWithDeleted(): void
+    {
+        $oId = $this->getTenantOrgId();
+        $searchFilter = new SearchFilter();
+        $searchFilter->setIsWithDeleted(true);
+        $searchFilter->setExtraParam('isWithSelf', true);
+        $searchFilter->setExtraParam('isWithDisable', true);
+        $result = $this->api->getSubOrganizations($oId, $searchFilter);
         $this->assertNotEmpty($result->items());
     }
 
