@@ -11,10 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ITalentOpenSDK\Tests\Api;
+namespace ITalentOpenSDK\Tests\Api\TenantBaseExternal;
 
 use ITalentOpenSDK\Api\TenantBaseExternal\EmployeeSubset;
 use ITalentOpenSDK\Constants;
+use ITalentOpenSDK\Model\EmployeeSubsetData;
 use ITalentOpenSDK\Model\SearchFilter;
 use ITalentOpenSDK\Tests\TestCase;
 
@@ -48,9 +49,34 @@ class EmployeeSubsetTest extends TestCase
 
     public function testGetSubsetByUserId(): void
     {
-        $oId = 630143176;
-        $result = $this->api->getSubsetByUserId(Constants::SUBSET_JOB_HISTORY, $oId);
+        $oId = 629813113;
+        $result = $this->api->getSubsetByUserId(Constants::SUBSET_PRESET_2, $oId);
         $this->assertNotEmpty($result->items());
+    }
+
+    public function testCreate(): void
+    {
+        $data = new EmployeeSubsetData();
+        $data->setUserId(629813113)
+            ->setFields(['ModifiedTime' => date('Y-m-d\TH:i:s')])
+            ->setCustomProperties([
+                'extAccountType_xxx_789237906' => 'CRM',
+            ]);
+        $result = $this->api->create(Constants::SUBSET_PRESET_2, $data);
+        $this->assertNotNull($result);
+    }
+
+    public function testUpdate(): void
+    {
+        $data = new EmployeeSubsetData();
+        $data->setUserId(629813113)
+            ->setObjectId('b1949efa-ce84-43dd-a503-f3055a36aadd')
+            ->setFields(['ModifiedTime' => date('Y-m-d\TH:i:s')])
+            ->setCustomProperties([
+                'extAccountType_xxx_789237906' => 'CRM',
+            ]);
+        $result = $this->api->update(Constants::SUBSET_PRESET_2, $data);
+        $this->assertTrue($result);
     }
 
 }

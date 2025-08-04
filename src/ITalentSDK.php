@@ -15,7 +15,6 @@ namespace ITalentOpenSDK;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use GuzzleHttp\Client;
-use ITalentOpenSDK\Api as ITalentApi;
 use ITalentOpenSDK\Auth\TokenManagerFactory;
 use ITalentOpenSDK\Http\ClientFactory;
 use ITalentOpenSDK\Http\HttpClient;
@@ -35,19 +34,21 @@ class ITalentSDK extends ContainerBuilder
 {
     private ArrayCollection $config;
 
-    private array $apiServices = [
-        'openapi' => ITalentApi\OpenApi::class,
-        'TenantBase.Organization' => ITalentApi\TenantBaseExternal\Organization::class,
-        'TenantBase.Employee' => ITalentApi\TenantBaseExternal\Employee::class,
-        'TenantBase.EmployeeSubset' => ITalentApi\TenantBaseExternal\EmployeeSubset::class,
-        'TenantBase.JobPost' => ITalentApi\TenantBaseExternal\JobPost::class,
-    ];
+    private ?array $apiServices = null;
 
     public function __construct(array $config)
     {
         parent::__construct();
         $this->config = new ArrayCollection($config);
         $this->registerServices();
+    }
+
+    private function getApiServices(): array
+    {
+        if ($this->apiServices === null) {
+            $this->apiServices = require __DIR__ . '/api_services.php';
+        }
+        return $this->apiServices;
     }
 
     private function registerServices(): void
@@ -57,7 +58,9 @@ class ITalentSDK extends ContainerBuilder
         $this->registerCache();
         $this->registerToken();
         $this->registerHttpClientWithToken();
-        foreach ($this->apiServices as $id => $class) {
+
+        // 使用懒加载的方式获取服务
+        foreach ($this->getApiServices() as $id => $class) {
             $this->registerApi($id, $class);
         }
     }

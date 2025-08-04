@@ -37,6 +37,7 @@ class Constants
     public const SUBSET_FAMILY = 'Family'; // 家庭成员
     public const SUBSET_CERTIFICATE = 'Certificate'; // 证书执照
     public const SUBSET_ESTIMATION_RESULT = 'EstimationResult'; // 考核结果
+    public const SUBSET_PERFORMANCE_IMPROVE_RESULT = 'PerformanceImproveResult'; // 绩效改进结果
     public const SUBSET_VOCATIONAL_QUALIFICATION_INFO = 'VocationalQualificationInfo'; // 执业（职业）资格信息
     public const SUBSET_PROFESSIONAL_TECHNICAL_POST_INFO = 'ProfessionalTechnicalPostInfo'; // 专业技术职务
     public const SUBSET_ENTRY_MATERIAL_REC = 'EntryMaterialRec'; // 材料管理
@@ -91,5 +92,21 @@ class Constants
     public const APPROVAL_STATUS_EFFECTIVE = 4; // 生效
     public const APPROVAL_STATUS_OBSOLETE = 5; // 作废
     public const APPROVAL_STATUS_RETURNED = 6; // 已驳回
+
+    /** 班次类型常量 - Attendance.WorkShiftType */
+    public const WORKSHIFT_TYPE_FLEXIBLE = 1; // 弹性班次
+    public const WORKSHIFT_TYPE_FIXED = 2; // 固定班次
+    public const WORKSHIFT_TYPE_FREE = 3; // 自由班次
+    public const WORKSHIFT_TYPE_LABOR = 6; // 劳动力班次
+
+    /** 班次属性常量 - Attendance.WorkShiftAttribute */
+    public const WORKSHIFT_ATTRIBUTE_WORKDAY = 1; // 工作日
+    public const WORKSHIFT_ATTRIBUTE_HOLIDAY = 2; // 节假日
+    public const WORKSHIFT_ATTRIBUTE_RESTDAY = 3; // 公休日
+
+    /** 半天班次分割方式常量 - Attendance.HalfSplitMethod */
+    public const HALF_SPLIT_METHOD_AUTO_BY_DURATION = 1; // 按工作时长的一半自动分割
+    public const HALF_SPLIT_METHOD_FIXED_TIME = 2; // 按固定时间点分割
+    public const HALF_SPLIT_METHOD_FIRST_BREAK = 3; // 按第一个休息时段的开始时间分割
 
 }

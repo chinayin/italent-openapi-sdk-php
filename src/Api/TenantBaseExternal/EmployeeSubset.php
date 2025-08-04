@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace ITalentOpenSDK\Api\TenantBaseExternal;
 
+use ITalentOpenSDK\Model\EmployeeSubsetData;
 use ITalentOpenSDK\Model\ScrollResult;
 use ITalentOpenSDK\Model\SearchFilter;
 use ITalentOpenSDK\Traits\HttpClientTrait;
@@ -69,6 +70,35 @@ class EmployeeSubset
 
         $r = $this->httpClient->postJson("TenantBaseExternal/api/v{$this->version}/EmpSubset/GetSubsetByUserId", $filter->toArray());
         return ScrollResult::fromArray($r);
+    }
+
+    /**
+     * 新建指定员工的指定子集对象相关信息
+     *
+     * @link https://open.italent.cn/#/open-document?menu=document-center&id=28e6a193-5ab1-4299-aec4-518f048010c0
+     */
+    public function create(string $metaObjectName, EmployeeSubsetData $data): ?string
+    {
+        $r = $this->httpClient->postJson(
+            "TenantBaseExternal/api/v{$this->version}/EmpSubset/Create",
+            ['metaObjectName' => $metaObjectName, 'data' => $data->toArray()]
+        );
+        // objectId
+        return $r['data'] ?? null;
+    }
+
+    /**
+     * 部分更新指定子集对象相关信息
+     *
+     * @link https://open.italent.cn/#/open-document?menu=document-center&id=961f66c4-943c-4744-b00f-cbdb35d824f2
+     */
+    public function update(string $metaObjectName, EmployeeSubsetData $data): bool
+    {
+        $r = $this->httpClient->postJson(
+            "TenantBaseExternal/api/v{$this->version}/EmpSubset/Update",
+            ['metaObjectName' => $metaObjectName, 'data' => $data->toArray()]
+        );
+        return true;
     }
 
 }

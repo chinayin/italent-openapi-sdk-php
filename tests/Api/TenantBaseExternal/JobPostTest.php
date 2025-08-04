@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ITalentOpenSDK\Tests\Api;
+namespace ITalentOpenSDK\Tests\Api\TenantBaseExternal;
 
 use ITalentOpenSDK\Api\TenantBaseExternal\JobPost;
 use ITalentOpenSDK\Model\SearchFilter;

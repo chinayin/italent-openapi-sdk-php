@@ -24,10 +24,12 @@ class Response extends \GuzzleHttp\Psr7\Response
         $data = json_decode((string)$stream, true);
         if (JSON_ERROR_NONE === json_last_error()) {
             // 检查北森 API 的错误响应格式
-            if (isset($data['code']) && $data['code'] !== 200 && $data['code'] !== '200') {
+            // 统一兼容 'code' 和 'Code'
+            $code = $data['code'] ?? $data['Code'] ?? null;
+            if ($code !== null && (string)$code !== '200') {
                 throw new ITalentException(
-                    $data['message'] ?? 'API Error',
-                    (int)$data['code'],
+                    $data['message'] ?? $data['Message'] ?? 'API Error',
+                    (int)$code,
                     null,
                     $data
                 );

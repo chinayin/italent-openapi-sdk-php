@@ -40,7 +40,8 @@ class ScrollResult extends Model
 
     public function hasMore(): bool
     {
-        return !empty($this->data);
+        // 如果只单纯判断data返回值为空，会出现兼容其他接口格式问题。
+        return !empty($this->scrollId) && !empty($this->data);
     }
 
     public function scrollId(): string

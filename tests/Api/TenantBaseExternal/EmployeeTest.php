@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ITalentOpenSDK\Tests\Api;
+namespace ITalentOpenSDK\Tests\Api\TenantBaseExternal;
 
 use ITalentOpenSDK\Api\TenantBaseExternal\Employee;
 use ITalentOpenSDK\Model\SearchFilter;
@@ -74,7 +74,7 @@ class EmployeeTest extends TestCase
 
     public function testGetBasicInfoByIds(): void
     {
-        $oIds = [631676689];
+        $oIds = [632491145];
         $result = $this->api->getBasicInfoByIds($oIds);
         $this->assertTrue($result->hasMore());
         $this->assertNotEmpty($result->items());
@@ -91,9 +91,10 @@ class EmployeeTest extends TestCase
 
     public function testGetServiceInfoByIds(): void
     {
-        $oIds = [631676689];
+        $oIds = [632491145];
         $searchFilter = (new SearchFilter())
-            ->setOIds($oIds);
+            ->setOIds($oIds)
+            ->setExtraParam('option', 2);
 
         $result = $this->api->getServiceInfoByIds($searchFilter);
         $this->assertNotEmpty($result->items());
