@@ -31,7 +31,7 @@ class WorkShiftRecord
      *
      * @link https://open.italent.cn/#/open-document?menu=document-center&id=d5639759-1606-4942-ad71-e95e4daa8109
      */
-    public function getWorkShiftRecordListByMonth(string $month, string $queryCursor = null, int $pageSize = 100): ScrollResult
+    public function getWorkShiftRecordListByMonth(string $month, ?string $queryCursor = null, int $pageSize = 100): ScrollResult
     {
         $r = $this->httpClient->postJson("AttendanceOpen/api/v{$this->version}/WorkShiftRecord/GetWorkShiftRecordListByMoth", [
             'month' => $month,
