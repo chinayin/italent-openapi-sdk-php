@@ -49,8 +49,8 @@ $searchFilter->setColumns(['Name', 'OId', 'Code', 'Status']);
 
 // 设置额外的自定义参数
 $searchFilter
-    ->setExtraParam('customField1', 'customValue1')
-    ->setExtraParam('customField2', ['array', 'value']);
+    ->addExtraParam('customField1', 'customValue1')
+    ->addExtraParam('customField2', ['array', 'value']);
 
 // 转换为数组，用于传递给 post() 方法
 $searchParams = $searchFilter->toArray();

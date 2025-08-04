@@ -64,7 +64,7 @@ class EmployeeTest extends TestCase
     {
         $orgOId = OrganizationTest::getTenantOrgId();
         $searchFilter = (new SearchFilter())
-            ->setExtraParam('orgOId', $orgOId)
+            ->addExtraParam('orgOId', $orgOId)
             ->setCapacity(2);
 
         $result = $this->api->getEmployeeOfOrganization($searchFilter);
@@ -94,7 +94,7 @@ class EmployeeTest extends TestCase
         $oIds = [632491145];
         $searchFilter = (new SearchFilter())
             ->setOIds($oIds)
-            ->setExtraParam('option', 2);
+            ->addExtraParam('option', 2);
 
         $result = $this->api->getServiceInfoByIds($searchFilter);
         $this->assertNotEmpty($result->items());

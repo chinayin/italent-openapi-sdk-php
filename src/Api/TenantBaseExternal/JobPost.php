@@ -52,7 +52,7 @@ class JobPost
             );
         }
         $filter ??= new SearchFilter();
-        $filter->setExtraParam('oIds', $oIds);
+        $filter->addExtraParam('oIds', $oIds);
 
         $r = $this->httpClient->postJson("TenantBaseExternal/api/v{$this->version}/JobPost/GetByOIds", $filter->toArray());
         return ScrollResult::fromArray($r);

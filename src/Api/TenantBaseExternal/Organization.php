@@ -81,7 +81,7 @@ class Organization
             );
         }
         $filter ??= new SearchFilter();
-        $filter->setExtraParam('codes', $codes);
+        $filter->addExtraParam('codes', $codes);
 
         $r = $this->httpClient->postJson("TenantBaseExternal/api/v{$this->version}/Organization/GetOrganizationInfoByCodes", $filter->toArray());
         return ScrollResult::fromArray($r);
@@ -95,7 +95,7 @@ class Organization
     public function getSubOrganizations(int $oId, ?SearchFilter $filter = null): ScrollResult
     {
         $filter ??= new SearchFilter();
-        $filter->setExtraParam('oId', $oId);
+        $filter->addExtraParam('oId', $oId);
 
         $r = $this->httpClient->postJson("TenantBaseExternal/api/v{$this->version}/Organization/GetSubOrganizations", $filter->toArray());
         return ScrollResult::fromArray($r);

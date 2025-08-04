@@ -70,8 +70,8 @@ class OrganizationTest extends TestCase
         $oId = $this->getTenantOrgId();
         $searchFilter = new SearchFilter();
         $searchFilter->setIsWithDeleted(true);
-        $searchFilter->setExtraParam('isWithSelf', true);
-        $searchFilter->setExtraParam('isWithDisable', true);
+        $searchFilter->addExtraParam('isWithSelf', true);
+        $searchFilter->addExtraParam('isWithDisable', true);
         $result = $this->api->getSubOrganizations($oId, $searchFilter);
         $this->assertNotEmpty($result->items());
     }

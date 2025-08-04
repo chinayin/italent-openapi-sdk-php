@@ -38,8 +38,8 @@ class VacationRemainTest extends TestCase
     public function testGetVacationRemainList(): void
     {
         $filter = new SearchFilter();
-        $filter->setExtraParam('year', '2025')
-            ->setExtraParam('vacationItemCode', 'AdjustLeave');
+        $filter->addExtraParam('year', '2025')
+            ->addExtraParam('vacationItemCode', 'AdjustLeave');
         $result = $this->api->getVacationRemainList($filter);
         $this->assertNotEmpty($result->items());
     }

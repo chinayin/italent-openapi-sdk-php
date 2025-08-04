@@ -190,20 +190,12 @@ class SearchFilter extends Model
     }
 
     /**
-     * 设置额外的自定义参数
+     * 设置所有额外参数
      */
-    public function setExtraParam(string $key, $value): self
+    public function setExtraParams(array $extraParams): self
     {
-        $this->extraParams[$key] = $value;
+        $this->extraParams = $extraParams;
         return $this;
-    }
-
-    /**
-     * 获取额外的自定义参数
-     */
-    public function getExtraParam(string $key)
-    {
-        return $this->extraParams[$key] ?? null;
     }
 
     /**
@@ -212,6 +204,15 @@ class SearchFilter extends Model
     public function getExtraParams(): array
     {
         return $this->extraParams;
+    }
+
+    /**
+     * 获取额外的自定义参数
+     */
+    public function addExtraParam(string $key, $value): self
+    {
+        $this->extraParams[$key] = $value;
+        return $this;
     }
 
     /**

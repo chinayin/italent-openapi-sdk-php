@@ -36,7 +36,7 @@ class EmployeeSubset
     public function getByTimeWindow(string $metaObjectName, ?SearchFilter $filter = null): ScrollResult
     {
         $filter ??= new SearchFilter();
-        $filter->setExtraParam('metaObjectName', $metaObjectName);
+        $filter->addExtraParam('metaObjectName', $metaObjectName);
 
         $r = $this->httpClient->postJson("TenantBaseExternal/api/v{$this->version}/EmpSubset/GetByTimeWindow", $filter->toArray());
         return ScrollResult::fromArray($r);
@@ -50,8 +50,8 @@ class EmployeeSubset
     public function getSubsetByIds(string $metaObjectName, array $oIds, ?SearchFilter $filter = null): ScrollResult
     {
         $filter ??= new SearchFilter();
-        $filter->setExtraParam('metaObjectName', $metaObjectName);
-        $filter->setExtraParam('ids', $oIds);
+        $filter->addExtraParam('metaObjectName', $metaObjectName);
+        $filter->addExtraParam('ids', $oIds);
 
         $r = $this->httpClient->postJson("TenantBaseExternal/api/v{$this->version}/EmpSubset/GetSubsetByIds", $filter->toArray());
         return ScrollResult::fromArray($r);
@@ -65,8 +65,8 @@ class EmployeeSubset
     public function getSubsetByUserId(string $metaObjectName, int $oId, ?SearchFilter $filter = null): ScrollResult
     {
         $filter ??= new SearchFilter();
-        $filter->setExtraParam('metaObjectName', $metaObjectName);
-        $filter->setExtraParam('oId', $oId);
+        $filter->addExtraParam('metaObjectName', $metaObjectName);
+        $filter->addExtraParam('oId', $oId);
 
         $r = $this->httpClient->postJson("TenantBaseExternal/api/v{$this->version}/EmpSubset/GetSubsetByUserId", $filter->toArray());
         return ScrollResult::fromArray($r);

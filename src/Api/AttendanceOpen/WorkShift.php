@@ -35,9 +35,9 @@ class WorkShift
     public function batchGetWorkShiftByStaffIdDate(array $staffIds, string $startDate, string $stopDate): ScrollResult
     {
         $filter = new SearchFilter();
-        $filter->setExtraParam('staffIds', $staffIds);
-        $filter->setExtraParam('startDate', $startDate);
-        $filter->setExtraParam('stopDate', $stopDate);
+        $filter->addExtraParam('staffIds', $staffIds);
+        $filter->addExtraParam('startDate', $startDate);
+        $filter->addExtraParam('stopDate', $stopDate);
 
         $r = $this->httpClient->postJson(
             "AttendanceOpen/api/v{$this->version}/WorkShift/BatchGetWorkShiftByStaffIdDate",
@@ -56,8 +56,8 @@ class WorkShift
      */
     public function getWorkShiftByUserId(SearchFilter $filter, int $pageIndex = 1, int $pageSize = 100): array
     {
-        $filter->setExtraParam('PageIndex', $pageIndex);
-        $filter->setExtraParam('PageSize', $pageSize);
+        $filter->addExtraParam('PageIndex', $pageIndex);
+        $filter->addExtraParam('PageSize', $pageSize);
 
         $r = $this->httpClient->postJson(
             "AttendanceOpen/api/v{$this->version}/WorkShift/GetWorkShiftByUserId",
@@ -73,8 +73,8 @@ class WorkShift
      */
     public function get(SearchFilter $filter, int $pageIndex = 1, int $pageSize = 100): array
     {
-        $filter->setExtraParam('PageIndex', $pageIndex);
-        $filter->setExtraParam('PageSize', $pageSize);
+        $filter->addExtraParam('PageIndex', $pageIndex);
+        $filter->addExtraParam('PageSize', $pageSize);
 
         $r = $this->httpClient->postJson(
             "AttendanceOpen/api/v{$this->version}/WorkShift/GetWorkShiftInfo",

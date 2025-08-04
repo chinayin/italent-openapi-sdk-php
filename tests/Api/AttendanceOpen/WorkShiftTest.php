@@ -36,7 +36,7 @@ class WorkShiftTest extends TestCase
     public function testGetWorkShiftByUserId(): void
     {
         $filter = new SearchFilter();
-        $filter->setExtraParam('UserDates', [
+        $filter->addExtraParam('UserDates', [
             ['UserId' => 629813113, 'CardDateTime' => '2025-07-01',],
         ]);
         $result = $this->api->getWorkShiftByUserId($filter);
@@ -46,7 +46,7 @@ class WorkShiftTest extends TestCase
     public function testGet(): void
     {
         $filter = new SearchFilter();
-        $filter->setExtraParam('StaffCardDates', [
+        $filter->addExtraParam('StaffCardDates', [
             'CardNumber' => '4735',
             'CardDateTime' => '2025-08-01',
         ]);

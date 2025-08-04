@@ -127,7 +127,7 @@ class Employee
             );
         }
         $filter ??= new SearchFilter();
-        $filter->setExtraParam('oIds', $oIds);
+        $filter->addExtraParam('oIds', $oIds);
 
         $r = $this->httpClient->postJson("TenantBaseExternal/api/v{$this->version}/Employee/GetBasicInfoByIds", $filter->toArray());
         return ScrollResult::fromArray($r);
@@ -141,7 +141,7 @@ class Employee
     public function getJuniorById(int $oId, ?SearchFilter $filter = null): ScrollResult
     {
         $filter ??= new SearchFilter();
-        $filter->setExtraParam('oId', $oId);
+        $filter->addExtraParam('oId', $oId);
 
         $r = $this->httpClient->postJson("TenantBaseExternal/api/v{$this->version}/Employee/GetJuniorById", $filter->toArray());
         return ScrollResult::fromArray($r);

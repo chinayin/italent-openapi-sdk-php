@@ -94,12 +94,8 @@ class SearchFilterTest extends TestCase
     {
         $filter = new SearchFilter();
 
-        $filter->setExtraParam('customField1', 'value1');
-        $filter->setExtraParam('customField2', ['array', 'value']);
-
-        $this->assertEquals('value1', $filter->getExtraParam('customField1'));
-        $this->assertEquals(['array', 'value'], $filter->getExtraParam('customField2'));
-        $this->assertNull($filter->getExtraParam('nonexistent'));
+        $filter->addExtraParam('customField1', 'value1');
+        $filter->addExtraParam('customField2', ['array', 'value']);
 
         $expected = [
             'customField1' => 'value1',
@@ -121,7 +117,7 @@ class SearchFilterTest extends TestCase
             ->addSort('Name', '1')
             ->addExtQuery('field1', 5, ['value1'])
             ->setColumns(['Name', 'Code'])
-            ->setExtraParam('customField', 'customValue');
+            ->addExtraParam('customField', 'customValue');
 
         $result = $filter->toArray();
 
@@ -154,7 +150,7 @@ class SearchFilterTest extends TestCase
         $filter
             ->setStartTime('2021-01-01T00:00:00')
             ->setCapacity(50)
-            ->setExtraParam('custom', 'value');
+            ->addExtraParam('custom', 'value');
 
         $result = $filter->toArray();
 
@@ -181,7 +177,7 @@ class SearchFilterTest extends TestCase
             ->setStartTime('2021-01-01T00:00:00')
             ->setCapacity(100)
             ->addSort('Name', '1')
-            ->setExtraParam('test', 'value');
+            ->addExtraParam('test', 'value');
 
         $this->assertInstanceOf(SearchFilter::class, $result);
         $this->assertSame($filter, $result);
