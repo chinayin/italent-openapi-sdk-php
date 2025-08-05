@@ -21,6 +21,7 @@ return [
     'TenantBase.EmployeeSubset' => ITalentApi\TenantBaseExternal\EmployeeSubset::class,
     'TenantBase.JobPost' => ITalentApi\TenantBaseExternal\JobPost::class,
     // 假勤管理
+    'AttendanceOpen.Vacation' => ITalentApi\AttendanceOpen\Vacation::class,
     'AttendanceOpen.VacationRemain' => ITalentApi\AttendanceOpen\VacationRemain::class,
     'AttendanceOpen.WorkShift' => ITalentApi\AttendanceOpen\WorkShift::class,
     'AttendanceOpen.WorkShiftRecord' => ITalentApi\AttendanceOpen\WorkShiftRecord::class,
