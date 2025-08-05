@@ -27,11 +27,7 @@ class ClientFactory
     {
         $stack = HandlerStack::create();
 
-        // 日志中间件配置
-        $logLevel = $config['log']['level'] ?? LogLevel::INFO;
-        $logFormat = strtolower($logLevel) === LogLevel::DEBUG ? MessageFormatter::DEBUG : MessageFormatter::CLF;
-        $stack->push(Middleware::log($logger, $logLevel, $logFormat));
-
+        // 这里的push是有顺序的，ua需要在log之前，本地日志才会有响应
         // ua
         $stack->push(Middleware::useragent());
 
@@ -42,6 +38,11 @@ class ClientFactory
 
         // 重试
         $stack->push(Middleware::retry($logger));
+
+        // 日志中间件配置
+        $logLevel = $config['log']['level'] ?? LogLevel::INFO;
+        $logFormat = strtolower($logLevel) === LogLevel::DEBUG ? MessageFormatter::DEBUG : MessageFormatter::CLF;
+        $stack->push(Middleware::log($logger, $logLevel, $logFormat));
 
         // 响应处理
         $stack->push(Middleware::response());

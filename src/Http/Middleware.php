@@ -43,19 +43,14 @@ class Middleware
 
     public static function auth(TokenStrategyInterface $token): callable
     {
-        return HttpMiddleware::mapRequest(function (RequestInterface $request) use ($token) {
-            $accessToken = $token->getAccessToken();
-            return $request->withHeader('Authorization', 'Bearer ' . $accessToken);
-        });
+        return HttpMiddleware::mapRequest(
+            fn (RequestInterface $request) => $request->withHeader('Authorization', 'Bearer ' . $token->getAccessToken())
+        );
     }
 
     public static function log(LoggerInterface $logger, string $level = LogLevel::INFO, string $format = MessageFormatter::CLF): callable
     {
-        return HttpMiddleware::log(
-            $logger,
-            new MessageFormatter($format),
-            $level
-        );
+        return HttpMiddleware::log($logger, new MessageFormatter($format), $level);
     }
 
     public static function retry(LoggerInterface $logger): callable
