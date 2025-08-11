@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace ITalentOpenSDK\Tests\Api\AttendanceOpen;
 
 use ITalentOpenSDK\Api\AttendanceOpen\Vacation;
+use ITalentOpenSDK\Model\SearchFilter;
 use ITalentOpenSDK\Tests\TestCase;
 
 class VacationTest extends TestCase
@@ -26,7 +27,16 @@ class VacationTest extends TestCase
         $this->api = $this->sdk->get('AttendanceOpen.Vacation');
     }
 
-    public function testGetVacationRemainList(): void
+    public function testGetVacationInfoByApprovalTime(): void
+    {
+        $filter = new SearchFilter();
+        $filter->addExtraParam('approveStartDate', '2025-07-15')->addExtraParam('approveStopDate', '2025-07-15');
+
+        $result = $this->api->getVacationInfoByApprovalTime($filter);
+        $this->assertNotEmpty($result->items());
+    }
+
+    public function testGetListByDate(): void
     {
         $day = '2025-07-01';
 

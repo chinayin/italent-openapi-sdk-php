@@ -28,6 +28,27 @@ class Vacation
     private int $version = 1;
 
     /**
+     * 根据审批通过时间获取休假数据-新
+     *
+     * @link https://open.italent.cn/#/open-document?menu=document-center&id=6d35c02b-1150-4271-b573-fe87947911fd
+     */
+    public function getVacationInfoByApprovalTime(SearchFilter $filter, ?string $queryCursor = null, int $pageSize = 100): ScrollResult
+    {
+        if ($queryCursor !== null) {
+            $filter->addExtraParam('queryCursor', $queryCursor);
+        }
+        if ($pageSize !== null) {
+            $filter->addExtraParam('pageSize', $pageSize);
+        }
+        $r = $this->httpClient->postJson("AttendanceOpen/api/v{$this->version}/Vacation/GetVacationInfoByApprovalTime", $filter->toArray());
+        return ScrollResult::fromArray([
+            'data' => $r['data']['vacationList'] ?? [],
+            'total' => $r['data']['total'] ?? null,
+            'scrollId' => $r['data']['sortCursor'] ?? '',
+        ]);
+    }
+
+    /**
      * 获取休假数据-新
      *
      * @link https://open.italent.cn/#/open-document?menu=document-center&id=1b34c50e-21c9-4a5b-a6a7-34144c9c8540

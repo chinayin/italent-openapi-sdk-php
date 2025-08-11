@@ -25,4 +25,6 @@ return [
     'AttendanceOpen.VacationRemain' => ITalentApi\AttendanceOpen\VacationRemain::class,
     'AttendanceOpen.WorkShift' => ITalentApi\AttendanceOpen\WorkShift::class,
     'AttendanceOpen.WorkShiftRecord' => ITalentApi\AttendanceOpen\WorkShiftRecord::class,
+    'AttendanceOpen.Overtime' => ITalentApi\AttendanceOpen\Overtime::class,
+    'AttendanceOpen.ExchangeLeave' => ITalentApi\AttendanceOpen\ExchangeLeave::class,
 ];
