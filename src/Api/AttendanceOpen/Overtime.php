@@ -47,7 +47,6 @@ class Overtime
         ]);
     }
 
-
     /**
      * 获取加班数据
      *
@@ -67,7 +66,6 @@ class Overtime
         ]);
     }
 
-
     /**
      * 按照审批通过时间获取加班数据
      *
@@ -78,9 +76,7 @@ class Overtime
         if ($queryCursor !== null) {
             $filter->addExtraParam('queryCursor', $queryCursor);
         }
-        if ($pageSize !== null) {
-            $filter->addExtraParam('pageSize', $pageSize);
-        }
+        $filter->addExtraParam('pageSize', $pageSize);
         $r = $this->httpClient->postJson("AttendanceOpen/api/v{$this->version}/AttendanceOvertime/GetApprovalCompletedOverTimeListByDateTime", $filter->toArray());
         return ScrollResult::fromArray([
             'data' => $r['data']['overTimeList'] ?? [],

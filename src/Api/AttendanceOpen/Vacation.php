@@ -37,9 +37,7 @@ class Vacation
         if ($queryCursor !== null) {
             $filter->addExtraParam('queryCursor', $queryCursor);
         }
-        if ($pageSize !== null) {
-            $filter->addExtraParam('pageSize', $pageSize);
-        }
+        $filter->addExtraParam('pageSize', $pageSize);
         $r = $this->httpClient->postJson("AttendanceOpen/api/v{$this->version}/Vacation/GetVacationInfoByApprovalTime", $filter->toArray());
         return ScrollResult::fromArray([
             'data' => $r['data']['vacationList'] ?? [],

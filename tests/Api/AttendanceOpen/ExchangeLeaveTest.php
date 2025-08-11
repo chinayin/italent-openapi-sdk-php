@@ -37,7 +37,6 @@ class ExchangeLeaveTest extends TestCase
             ->addExtraParam('ValidityDateStart', '2025-07-01 00:00:00')
             ->addExtraParam('ValidityDateEnd', '2025-12-31 00:00:00');
 
-
         $result = $this->api->details($filter);
         $this->assertNotEmpty($result->items());
     }
