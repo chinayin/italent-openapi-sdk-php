@@ -65,6 +65,8 @@ class EmployeeTest extends TestCase
         $orgOId = OrganizationTest::getTenantOrgId();
         $searchFilter = (new SearchFilter())
             ->addExtraParam('orgOId', $orgOId)
+            ->addExtraParam('includeSubOrg', true)
+            ->setColumns(['userID', 'name'])
             ->setCapacity(2);
 
         $result = $this->api->getEmployeeOfOrganization($searchFilter);
