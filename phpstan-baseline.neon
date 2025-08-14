@@ -5,3 +5,9 @@ parameters:
 			identifier: method.notFound
 			count: 4
 			path: src/Http/HttpClient.php
+
+		-
+			message: '#^Function GuzzleHttp\\Psr7\\stream_for not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: src/Http/Response.php
