@@ -33,6 +33,8 @@ class TestCase extends \PHPUnit\Framework\TestCase
             'log' => [
                 'file' => "$runtimeDir/log/sdk.log",
                 'level' => 'debug',
+                // 特殊handler覆盖逻辑
+                //'handler' => new RotatingFileHandler("$runtimeDir/log/sdk.log"),
             ],
             'http' => [
                 'debug' => false,

@@ -17,6 +17,8 @@ use ITalentOpenSDK\Api\OpenApi;
 use ITalentOpenSDK\Auth\ITalentTokenManager;
 use ITalentOpenSDK\Auth\TokenStrategyInterface;
 use ITalentOpenSDK\Http\HttpClient;
+use ITalentOpenSDK\ITalentSDK;
+use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Log\LoggerInterface;
@@ -115,4 +117,38 @@ class ITalentSDKTest extends TestCase
         $timezone = $logger->getTimezone();
         $this->assertEquals('PRC', $timezone->getName());
     }
+
+    public function testCustomHandlerRegistration(): void
+    {
+        $runtimeDir = dirname(__DIR__) . '/runtime';
+        $logFile = $runtimeDir . '/log/custom.log';
+
+        // 创建自定义 Handler
+        $customHandler = new RotatingFileHandler($logFile, 5, Logger::DEBUG);
+
+        // 使用自定义 Handler 创建 SDK
+        $config = [
+            'app_key' => 'test_key',
+            'app_secret' => 'test_secret',
+            'log' => [
+                'handler' => $customHandler,
+                'timezone' => 'PRC',
+            ],
+        ];
+
+        $sdk = new ITalentSDK($config);
+        $logger = $sdk->get('logger');
+
+        $this->assertInstanceOf(Logger::class, $logger);
+
+        // 验证 Handler 是否正确设置
+        $handlers = $logger->getHandlers();
+        $this->assertCount(1, $handlers);
+        $this->assertInstanceOf(RotatingFileHandler::class, $handlers[0]);
+
+        // 验证时区设置
+        $timezone = $logger->getTimezone();
+        $this->assertEquals('PRC', $timezone->getName());
+    }
+
 }

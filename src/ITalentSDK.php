@@ -18,6 +18,7 @@ use GuzzleHttp\Client;
 use ITalentOpenSDK\Auth\TokenManagerFactory;
 use ITalentOpenSDK\Http\ClientFactory;
 use ITalentOpenSDK\Http\HttpClient;
+use Monolog\Handler\HandlerInterface;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -68,16 +69,26 @@ class ITalentSDK extends ContainerBuilder
     private function registerLogger(): void
     {
         $log = $this->config->get('log');
+
+        // 直接传入 Logger 实例
         if (is_subclass_of($log, LoggerInterface::class)) {
             $this->register('logger', $log);
-        } elseif ($log) {
+            return;
+        }
+        // 确定使用哪个 Handler
+        if ($log && isset($log['handler']) && $log['handler'] instanceof HandlerInterface) {
+            // 自定义 Handler
+            $this->set('logger_handler', $log['handler']);
+        } elseif ($log && isset($log['file'])) {
+            // 默认 StreamHandler
             $this->register('logger_handler', StreamHandler::class)
                 ->setArguments([$log['file'], $log['level'] ?? 'info']);
-            $this->registerMonolog();
         } else {
+            // NullHandler
             $this->register('logger_handler', NullHandler::class);
-            $this->registerMonolog();
         }
+
+        $this->registerMonolog();
     }
 
     private function registerMonolog(): void
@@ -92,12 +103,12 @@ class ITalentSDK extends ContainerBuilder
     private function registerHttpClient(): void
     {
         $this->register('client', Client::class)
+            ->setFactory([ClientFactory::class, 'create'])
             ->setArguments([
                 new Reference('logger'),
                 null, // no token
                 $this->config->toArray(),
-            ])
-            ->setFactory([ClientFactory::class, 'create']);
+            ]);
         $this->register('http_client', HttpClient::class)
             ->addArgument(new Reference('client'));
     }
@@ -105,12 +116,12 @@ class ITalentSDK extends ContainerBuilder
     private function registerHttpClientWithToken(): void
     {
         $this->register('client_with_token', Client::class)
+            ->setFactory([ClientFactory::class, 'create'])
             ->setArguments([
                 new Reference('logger'),
                 new Reference('token'),
                 $this->config->toArray(),
-            ])
-            ->setFactory([ClientFactory::class, 'create']);
+            ]);
         $this->register('http_client_with_token', HttpClient::class)
             ->addArgument(new Reference('client_with_token'));
     }

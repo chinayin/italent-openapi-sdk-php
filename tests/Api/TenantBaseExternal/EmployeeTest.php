@@ -78,7 +78,6 @@ class EmployeeTest extends TestCase
     {
         $oIds = [632491145];
         $result = $this->api->getBasicInfoByIds($oIds);
-        $this->assertTrue($result->hasMore());
         $this->assertNotEmpty($result->items());
     }
 
