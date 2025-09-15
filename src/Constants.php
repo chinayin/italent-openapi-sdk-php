@@ -109,4 +109,11 @@ class Constants
     public const HALF_SPLIT_METHOD_FIXED_TIME = 2; // 按固定时间点分割
     public const HALF_SPLIT_METHOD_FIRST_BREAK = 3; // 按第一个休息时段的开始时间分割
 
+    /** 薪酬管理常量 - 薪酬子集 */
+    public const SALARY_SUBSET_PRESET_1 = 'PresetSalarySubset1'; // 预置薪酬子集1
+    public const SALARY_SUBSET_PRESET_2 = 'PresetSalarySubset2';
+    public const SALARY_SUBSET_PRESET_3 = 'PresetSalarySubset3';
+    public const SALARY_SUBSET_PRESET_4 = 'PresetSalarySubset4';
+    public const SALARY_SUBSET_PRESET_5 = 'PresetSalarySubset5';
+
 }

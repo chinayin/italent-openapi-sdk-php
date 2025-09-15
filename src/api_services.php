@@ -27,4 +27,7 @@ return [
     'AttendanceOpen.WorkShiftRecord' => ITalentApi\AttendanceOpen\WorkShiftRecord::class,
     'AttendanceOpen.Overtime' => ITalentApi\AttendanceOpen\Overtime::class,
     'AttendanceOpen.ExchangeLeave' => ITalentApi\AttendanceOpen\ExchangeLeave::class,
+    // 薪酬管理
+    'Compensation.PresetSalarySubset' => ITalentApi\Compensation\PresetSalarySubset::class,
+    'Compensation.PublicData' => ITalentApi\Compensation\PublicData::class,
 ];
