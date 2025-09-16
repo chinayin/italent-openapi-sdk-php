@@ -65,4 +65,47 @@ class PresetSalarySubsetTest extends TestCase
         $this->assertNull($result);
     }
 
+    public function testAddOrEditBatch(): void
+    {
+        $items = [];
+
+        $data = new SalarySubsetData();
+        $data->setStaffId("630143787")
+            ->setCustomFields([
+                'extsalaryMonth_614181_2006513888' => '2025-08',
+                'extcurrencySymbol_614181_852666027' => 'CNY',
+                'exttotalSalary_614181_1689881326' => 25906.51,
+                'extbasicSalary_614181_1204972321' => 7000,
+                'extbusinessSalary_614181_397273561' => 15426.51,
+                'extmanagerSalary_614181_1299076106' => 0,
+                'extapplyBonus_614181_443680259' => 0,
+                'extrankingReward_614181_954614424' => 1000,
+                'extonlinePushSalary_614181_2084683026' => 0,
+                'extpromotionReward_614181_700194380' => 300,
+                'extpayrentReward_614181_441079462' => 180,
+            ]);
+        $items[] = $data;
+
+        $data = new SalarySubsetData();
+        $data->setStaffId("630143980")
+            ->setCustomFields([
+                'extsalaryMonth_614181_2006513888' => '2025-08',
+                'extcurrencySymbol_614181_852666027' => 'CNY',
+                'exttotalSalary_614181_1689881326' => 21897.75,
+                'extbasicSalary_614181_1204972321' => 11625,
+                'extbusinessSalary_614181_397273561' => 5262.75,
+                'extmanagerSalary_614181_1299076106' => 5000,
+                'extapplyBonus_614181_443680259' => 0,
+                'extrankingReward_614181_954614424' => 0,
+                'extonlinePushSalary_614181_2084683026' => 0,
+                'extpromotionReward_614181_700194380' => 0,
+                'extpayrentReward_614181_441079462' => 10,
+            ]);
+        $items[] = $data;
+
+        $result = $this->api->addOrEditBatch(Constants::SALARY_SUBSET_PRESET_1, $items);
+        var_dump($result);
+        $this->assertNull($result);
+    }
+
 }

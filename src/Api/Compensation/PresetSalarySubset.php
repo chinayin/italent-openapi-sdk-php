@@ -41,4 +41,25 @@ class PresetSalarySubset
         return $r['data'] ?? null;
     }
 
+    /**
+     * 添加或修改预置薪酬子集(批量)
+     *
+     * @link https://open.italent.cn/#/open-document?menu=document-center&id=ca13de1c-b945-4615-8934-e29d2a96a638
+     */
+    public function addOrEditBatch(string $metaObjectName, array $items): ?array
+    {
+        $models = [];
+        foreach ($items as $item) {
+            if ($item instanceof SalarySubsetData) {
+                $models[] = $item->toArray();
+            }
+        }
+        $r = $this->httpClient->postJson(
+            "compensationv2/v{$this->version}/PresetSalarySubset/AddOrEdit",
+            ['presetSalarySubsetCode' => $metaObjectName, 'models' => $models]
+        );
+        // objectId
+        return $r['data'] ?? null;
+    }
+
 }
