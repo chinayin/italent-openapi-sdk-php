@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace ITalentOpenSDK\Api\Compensation;
 
+use ITalentOpenSDK\Model\OperationResult;
 use ITalentOpenSDK\Model\SalarySubsetData;
 use ITalentOpenSDK\Traits\HttpClientTrait;
 
@@ -31,14 +32,13 @@ class PresetSalarySubset
      *
      * @link https://open.italent.cn/#/open-document?menu=document-center&id=ca13de1c-b945-4615-8934-e29d2a96a638
      */
-    public function addOrEdit(string $metaObjectName, SalarySubsetData $data): ?array
+    public function addOrEdit(string $metaObjectName, SalarySubsetData $data): OperationResult
     {
         $r = $this->httpClient->postJson(
             "compensationv2/v{$this->version}/PresetSalarySubset/AddOrEdit",
             ['presetSalarySubsetCode' => $metaObjectName, 'models' => [$data->toArray()]]
         );
-        // objectId
-        return $r['data'] ?? null;
+        return OperationResult::fromArray($r);
     }
 
     /**
@@ -46,7 +46,7 @@ class PresetSalarySubset
      *
      * @link https://open.italent.cn/#/open-document?menu=document-center&id=ca13de1c-b945-4615-8934-e29d2a96a638
      */
-    public function addOrEditBatch(string $metaObjectName, array $items): ?array
+    public function addOrEditBatch(string $metaObjectName, array $items): OperationResult
     {
         $models = [];
         foreach ($items as $item) {
@@ -58,8 +58,7 @@ class PresetSalarySubset
             "compensationv2/v{$this->version}/PresetSalarySubset/AddOrEdit",
             ['presetSalarySubsetCode' => $metaObjectName, 'models' => $models]
         );
-        // objectId
-        return $r['data'] ?? null;
+        return OperationResult::fromArray($r);
     }
 
 }

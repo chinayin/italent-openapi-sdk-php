@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace ITalentOpenSDK\Model;
 
-class Model
+abstract class Model implements \JsonSerializable
 {
     public function toArray(): array
     {
@@ -30,7 +30,12 @@ class Model
         return $result;
     }
 
-    public function generateBody(): string
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
+    }
+
+    public function __toString(): string
     {
         return json_encode($this->toArray(), JSON_UNESCAPED_UNICODE);
     }
